@@ -1,0 +1,109 @@
+/* Navigation Bar */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #56cc75;
+  color: black;
+}
+
+/* Student List */
+
+.studentList  table,.studentList th,.studentList td {
+  border: 1px solid black;
+}
+
+.studentList th,.studentList td{
+  text-align: center;
+}
+
+.studentList th {
+  background-color: #56cc75;
+  height: 50px;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.delButtonDiv{
+  margin:5px 5px 5px 0px;
+  float: right;
+}
+
+/* Add & Edit Student */
+
+.inputTable table,.inputTable td{
+  border: 0px;
+}
+
+.inputTable td{
+  text-align: left;
+  width: 250px;
+}
+
+.inputTable input[type=text],.inputTable input[type=password]{
+  width: 250px;
+}
+
+.moduleList table, .moduleList th, .moduleList td{
+  border: 1px solid black;
+}
+
+.submitAlert{
+  color: red;
+}
+
+/* Module List */
+
+.moduleList th, .moduleList td {
+  text-align: center;
+  font-size: 20px;
+}
+
+.moduleList th{
+  background-color: #56cc75;
+}
+
+/* Assign Module */
+
+.selectModule{
+  margin: 10px 20px 25px 0px;
+}
+
+/* Login Screen */
+
+.loginDiv{
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loginDiv input[type=submit]{
+  display: block;
+  margin: 10 auto;
+}
+
+/* Buttons */
+.submitButton {
+    width: 200px;
+    height: 35px;
+    background-color: #56cc75;
+    font-size: 18px;
+    border: none;
+    border-radius: 16px;
+}
+
+
++
