@@ -7,5 +7,5 @@
    <a href="addstudent.php">Add Student</a>
    <a href="students.php">Student List</a>
    <a href="logout.php">Logout</a>
-
+   
 </div>

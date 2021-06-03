@@ -2,6 +2,10 @@
 .topnav {
   background-color: #333;
   overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid black;
 }
 
 .topnav a {
@@ -14,10 +18,14 @@
 }
 
 .topnav a:hover {
+  text-decoration: none;
   background-color: #56cc75;
   color: black;
 }
 
+body{
+  padding-top: 50px;
+}
 /* Student List */
 
 .studentList  table,.studentList th,.studentList td {
@@ -88,6 +96,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.loginDiv td {
+  font-size: 18px;
+  padding: 3px;
 }
 
 .loginDiv input[type=submit]{

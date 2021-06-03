@@ -1,5 +1,7 @@
 <?php
 
+  //Helper script to extract an image from the MySQL database
+
   include('_includes/dbconnect.inc');
 
   $id = $_GET['id'];

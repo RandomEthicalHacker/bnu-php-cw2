@@ -1,10 +1,13 @@
 <?php
 
+  //Includes
   include("_includes/config.inc");
   include('_includes/dbconnect.inc');
   include("_includes/functions.inc");
 
+  //Executing deletion if form submitted
   if(isset($_POST['delete'])){
+    //Pulling all studentids to an array
     $IDs = array();
     $sql = "SELECT studentid FROM student";
     $result = mysqli_query($conn, $sql);
@@ -13,6 +16,7 @@
       $IDs[] = $row['studentid'];
       $numberOfRows++;
     }
+    //Deletion of rows selected
     for ($i = 0; $i < $numberOfRows; $i++){
       if(isset($_POST[$i])){
         $sql = "DELETE FROM student WHERE studentid = {$IDs[$i]}";
@@ -20,9 +24,11 @@
       }
     }
   }
+  //Header and Navigation Bar display
   echo template("templates/partials/header.php");
   echo template("templates/partials/nav.php");
 
+  //Setting page content (Table headers)
   $data['content'] = "
     <form action='students.php' method='post'>
     <table class='studentList' align='center'>
@@ -41,13 +47,14 @@
     <th>X</th>
     </tr>";
 
+    //Display table headers
     echo template("templates/default.php", $data);
 
-  $i = 0;
-  $checkboxnum = 0;
-  $sql = "SELECT * FROM student";
-  $result = mysqli_query($conn, $sql);
-  while($row = mysqli_fetch_assoc($result)){
+    //Setting and displaying page content (student table)
+    $i = 0;
+    $sql = "SELECT * FROM student";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_assoc($result)){
     if($i%2 == 0){
       echo "<tr>";
     }
@@ -66,11 +73,10 @@
     <td><center>" . $row['county'] . "</center></td>
     <td><center>" . $row['country'] . "</center></td>
     <td><center>" . $row['postcode'] . "</center></td>
-    <td><center><input type='checkbox' name = " . $checkboxnum . " value='set'/></center></td>
+    <td><center><input type='checkbox' name = " . $i . " value='set'/></center></td>
     </tr>";
     echo template("templates/default.php", $data);
     $i++;
-    $checkboxnum++;
   }
 
   $data['content'] = "
@@ -81,7 +87,6 @@
   </form>";
 
   echo template("templates/default.php", $data);
-
   echo template("templates/partials/footer.php");
 
   mysqli_close($conn);

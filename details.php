@@ -100,7 +100,7 @@ if (isset($_SESSION['id'])) {
        </td>
      </tr>
    </table>
-   <input type="submit" value="Save" name="submit"/>
+   <input type="submit" value="Save" name="submit" class='submitButton'/>
    </form>
 
 EOD;

@@ -1,61 +1,17 @@
 <?php
+
+  //Includes
   include("_includes/functions.inc");
   include('_includes/dbconnect.inc');
   include "_includes/passwordLib.php";
 
 
-  if(isset($_POST['submit'])){
-
-    $id = $_POST['studentid'];
-    $password = $_POST['password'];
-    $passwordConf = $_POST['passwordConfirm'];
-    $dob = $_POST['dob'];
-    $fName = $_POST['firstName'];
-    $lName = $_POST['lastName'];
-    $house = $_POST['house'];
-    $town = $_POST['town'];
-    $county = $_POST['county'];
-    $country = $_POST['country'];
-    $postcode = $_POST['postcode'];
-    $image = $_FILES['image']['tmp_name'];
-    $imagedata = addslashes(fread(fopen($image, "r"), filesize($image)));
-
-
-    if(strlen($id) == 8 && strlen($password) >= 6 && $password == $passwordConf){
-
-      $password = password_hash($password, PASSWORD_DEFAULT);
-
-      $sql = "INSERT INTO `student` (`studentid`, `password`, `dob`, `firstname`, `lastname`, `house`, `town`, `county`, `country`, `postcode`, `picture`)
-                VALUES ('$id', '$password', '$dob', '$fName', '$lName', '$house', '$town', '$county', '$country', '$postcode', '$imagedata');";
-
-      $result = mysqli_query($conn, $sql);
-
-      if($result){
-        echo "Successful insertion!";
-      }
-      else{
-        echo "An error occured!";
-      }
-
-    }
-    else{
-      if(strlen($id) != 8){
-        echo "<div class='submitAlert'>Please enter a valid student id</div>";
-      }
-      if(strlen($password) < 6){
-        echo "<div class='submitAlert'>Your password must be at least 6 characters long</div>";
-      }
-      if($password != $passwordConf){
-        echo "<div class='submitAlert'>Your password does not match your confirmation</div>";
-      }
-    }
-  }
-
-
-
+  //Header and Navigation Bar display
   echo template("templates/partials/header.php");
   echo template("templates/partials/nav.php");
 
+
+  //Setting page content
   $data['content']= "
   <h2>Add Student</h2>
   <form action='addstudent.php' method='post' enctype='multipart/form-data'>
@@ -159,11 +115,62 @@
     </table>
 
 
-    <input type='submit' name='submit' value='Submit'/>
+    <input type='submit' name='submit' value='Submit' class='submitButton'/>
   </form>";
 
-  echo template("templates/default.php", $data);
 
+  //Displaying page content and footer
+  echo template("templates/default.php", $data);
   echo template("templates/partials/footer.php");
+
+
+  //Executing insertion if the form is submitted
+  if(isset($_POST['submit'])){
+
+    //Setting variables for the query
+    $id = $_POST['studentid'];
+    $password = $_POST['password'];
+    $passwordConf = $_POST['passwordConfirm'];
+    $dob = $_POST['dob'];
+    $fName = $_POST['firstName'];
+    $lName = $_POST['lastName'];
+    $house = $_POST['house'];
+    $town = $_POST['town'];
+    $county = $_POST['county'];
+    $country = $_POST['country'];
+    $postcode = $_POST['postcode'];
+    $image = $_FILES['image']['tmp_name'];
+    $imagedata = addslashes(fread(fopen($image, "r"), filesize($image)));
+
+    //Validating the provided information and querying sql statement
+    if(strlen($id) == 8 && strlen($password) >= 6 && $password == $passwordConf){
+
+      $password = password_hash($password, PASSWORD_DEFAULT);
+
+      $sql = "INSERT INTO `student` (`studentid`, `password`, `dob`, `firstname`, `lastname`, `house`, `town`, `county`, `country`, `postcode`, `picture`)
+                VALUES ('$id', '$password', '$dob', '$fName', '$lName', '$house', '$town', '$county', '$country', '$postcode', '$imagedata');";
+
+      $result = mysqli_query($conn, $sql);
+
+      if($result){
+        echo "Successful insertion!";
+      }
+      else{
+        echo "An error occured!";
+      }
+    }
+    //Displaying appropriate error message
+    else{
+      if(strlen($id) != 8){
+        echo "<div class='submitAlert'>Please enter a valid student id</div>";
+      }
+      if(strlen($password) < 6){
+        echo "<div class='submitAlert'>Your password must be at least 6 characters long</div>";
+      }
+      if($password != $passwordConf){
+        echo "<div class='submitAlert'>Your password does not match your confirmation</div>";
+      }
+    }
+  }
 
 ?>
